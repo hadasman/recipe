@@ -1,0 +1,120 @@
+/* Color Scheme 1*/
+:root {
+  --background_color: #1C2340;
+  --font_color: #F0DAC5;
+  --border_color: #50223C;
+  --button_color: #AEF359;
+}
+
+
+/*Color Scheme 2*/
+/*:root {
+  --background_color: #F08A5D;
+  --font_color: #7D0633;
+  --border_color: #EDCFA9;
+  --button_color: #6A2C70;
+}*/
+
+/*Color Scheme 3*/
+/*:root {
+  --background_color: #8fcfd1;
+  --font_color: #f6efa6;
+  --border_color: #f6ab6c;
+  --button_color: #df5e88;
+}*/
+
+/*Color Scheme 4*//*
+:root {
+  --background_color: #dddddd;
+  --font_color: #84a9ac;
+  --border_color: #d9adad;
+  --button_color: #89c9b8;
+}*/
+
+
+
+body{
+	background: var(--background_color);
+	font-family: ' Pacifico', cursive;
+}
+
+.heading{
+	color: var(--font_color);
+	font-size: 2.5rem;
+	display: block;
+
+}
+
+.timer{
+	color: var(--font_color);
+	text-align: center;
+	width: 20rem;
+	height: 20rem;
+	border: 5px solid var(--border_color);
+	border-radius: 10rem;
+/*	background: url(white_clock.png) no-repeat;
+	background-size: cover;
+*/
+	/*The next 3 lines make sure what is in the container is in the center*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position:relative;
+	right:-35%;
+	top: -100px;
+
+}
+
+.fas{
+	color: var(--button_color);
+	border: 2px solid transparent;
+	padding: 1rem;
+	border-radius: 2rem;
+}
+
+.fa-play:hover, .fa-redo-alt:hover, .fa-palette:hover{
+	color: var(--font_color);
+	border: 2px solid var(--font_color);
+	transition: 0.3s ease;
+}
+
+.row{
+	width: 100%;
+}
+
+.show_message{
+	display: block;
+	padding: 0.5rem 0;
+	color: var(--background_color);
+	background: var(--button_color);
+	border-radius: 0.5rem;
+	transition: 0.5s, ease;
+}
+
+.small_text{
+	color: var(--font_color);
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.input_field{
+	width: 50px; 
+	text-align:center; 
+	margin: 3px
+}
+
+#buttons_container{
+	position: relative;
+	top: -140px;
+}
+
+#explanation{
+	color: var(--font_color);
+	font-family: 'Times New Roman';
+	color: var(--font_color);
+}
+
+.button1{
+	color: "FFFFFF";
+}
