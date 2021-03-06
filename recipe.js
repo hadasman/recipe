@@ -8,7 +8,7 @@ function template(){
 }
 var line_number = 0;
 function next_item(){
-	if (line_number>=num_lines){
+	if (line_number==num_lines-1){
 		Notification.requestPermission().then(permission => {
 			if (permission==="granted"){
 				console.log(permission);
