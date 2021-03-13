@@ -7,7 +7,7 @@ function template(){
 	// document.getElementById("seconds").innerHTML = seconds;
 }
 var line_number = 0;
-function next_item(){
+function next_item(n){
 	if (line_number==num_lines-1){
 		Notification.requestPermission().then(permission => {
 			if (permission==="granted"){
@@ -16,12 +16,21 @@ function next_item(){
 				}
 		})}
 	else{
-		line_number = line_number + 1;
-		console.log(`button${line_number}`);
+			line_number = `${n}`;
+			console.log(line_number);
+			console.log(`button${line_number}`);
 
-		// Buttons
-		// document.querySelector(`#button${line_number}`).style.color = "#1C2340";
-		document.querySelector(`#step_button${line_number}`).style.color = "#1C2340";
+			if (document.querySelector(`#step_button${line_number}`).style.OnOff!="Off"){		// line_number = line_number + 1;
+			
+					// Buttons
+					document.querySelector(`#step_button${line_number}`).style.color = "#1C2340";
+					document.querySelector(`#step_button${line_number}`).style.OnOff = "Off";
+					console.log(document.querySelector(`#step_button${line_number}`).style.OnOff);
+			}else{
+					document.querySelector(`#step_button${line_number}`).style.color = "#AEF359";
+					document.querySelector(`#step_button${line_number}`).style.OnOff = "On";
+
+			}	
 		}
 	}
 
@@ -43,13 +52,24 @@ input.addEventListener('change', function(e){
 		     var elem = document.createElement('input');
 		     elem.type = 'button';
 		     elem.value = lines[i];
-		     elem.onclick = next_item;
-		     elem.className = "fas fa-wave-square fa-2x justify-content-center align-items-center";
+		     const st = `${i+1}`;
+		     elem.onclick = function () {
+    next_item(st);
+};;
+		     elem.className = "wrapped_div fas fa-wave-square fa-2x justify-content-center align-items-center";
 		     elem.style.position = "relative";
 		     elem.style.right = "2px";
 		     elem.style.float = "center";
-		     elem.id = `step_button${i+1}`;
+		     elem.id = `step_button${i+1}`;		     		     
 		     elem.style.background = "#1C2340";
+		     // elem.style.width = "400px";
+		     elem.style.height = "100px";
+		     // elem.display = "inline-block";
+		     // elem.style.overflowWrap = "anywhere";
+		     // elem.style.wordWrap = "break-word";
+		     // elem.style.lineBreak = "strict";
+
+
 		     // docFrag.appendChild(elem);
 		     newDiv.appendChild(elem);
 		}

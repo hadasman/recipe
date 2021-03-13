@@ -31,3 +31,8 @@ textarea {
 	border: 2px solid var(--font_color);
 	transition: 0.3s ease;
 }
+
+.wrapped_div{
+  white-space: pre-wrap;
+  width: 90%;
+}
