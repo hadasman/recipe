@@ -2,37 +2,79 @@
   --background_color: #1C2340;
   --font_color: #F0DAC5;
   --border_color: #50223C;
-  --button_color: #AEF359;
+  --button_font_color: #F0DAC5;
 }
-div {
+
+body {
+    background-color: #fbe7b2;
+    color: #c576ac;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+
+.container{
+    justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
- 
-textarea {
-    margin-top: 15px;
-    width: 50%;
-}
 
-.fas{
-	color: var(--button_color);
-	border: 2px solid "black";
-	padding: 10px;
-  margin: 20px;
+.step_button {
+    background-color: #F0DAC5;
+    color: #c576ac;
+    font-size: 20px;
+    font-weight: bold;
+
+    white-space: pre-wrap;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 20px;
 	border-radius: 20px;
-  align-items: center;
-  display: block;
-  right: -140px;
+    align-items: center;
+    display: block;
+    right: -140px;
 }
 
-.fa-play:hover, .fa-redo-alt:hover, .fa-palette:hover{
-	color: var(--font_color);
-	border: 2px solid var(--font_color);
-	transition: 0.3s ease;
+.ingredient_list {
+    border: 2px solid black;
+    padding: 30px;
+    width: 20%;
 }
 
-.wrapped_div{
-  white-space: pre-wrap;
-  width: 90%;
+.ingredient_list_item {
+    text-align: right;
+    padding: 0px;
+    margin: 20px;
+	border-radius: 20px;
+    align-items: center;
+    display: block;
+}
+
+
+
+
+#customFileButton {
+    background-color: #76b5c5; /* Blue background */
+    color: white;             /* White text */
+    padding: 10px 20px;       /* Top/bottom, left/right padding */
+    border: none;             /* No default border */
+    border-radius: 5px;       /* Slightly rounded corners */
+    cursor: pointer;          /* Hand cursor on hover */
+    font-size: 16px;          /* Font size */
+    font-family: Arial, sans-serif; /* Readable font */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+#customFileButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#customFileButton:active {
+    background-color: #004085; /* Even darker on click */
+    transform: translateY(1px); /* Slight press effect */
+    box-shadow: none;
 }
