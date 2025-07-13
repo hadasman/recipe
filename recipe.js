@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var recipeSelect = document.getElementById('recipeSelect');
+    var fileInput = document.getElementById('customFileButton');
+    
     if (!recipeSelect) return;
     
     // Populate dropdown
@@ -33,8 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
     recipeSelect.addEventListener('change', function() {
         var selectedFile = this.value;
         if (selectedFile === 'upload') {
-            // Trigger file upload directly
-            document.getElementById('customFileButton').click();
+            // Make file input visible for mobile compatibility
+            console.log('Making file input visible...');
+            if (fileInput) {
+                fileInput.style.display = 'block';
+                fileInput.style.marginTop = '10px';
+                fileInput.style.width = '100%';
+                fileInput.style.padding = '10px';
+                fileInput.style.border = '2px dashed #ccc';
+                fileInput.style.borderRadius = '5px';
+                fileInput.style.backgroundColor = '#f9f9f9';
+                // Add a label
+                var label = document.createElement('p');
+                label.textContent = 'Select your recipe file (any file type):';
+                label.style.margin = '0 0 10px 0';
+                label.style.fontSize = '14px';
+                label.style.color = '#666';
+                fileInput.parentNode.insertBefore(label, fileInput);
+            } else {
+                console.error('File input not found!');
+            }
             // Reset dropdown to default
             this.value = '';
         } else if (selectedFile) {
@@ -42,6 +62,46 @@ document.addEventListener('DOMContentLoaded', function() {
             loadRecipeFile(selectedFile);
         }
     });
+    
+    // File upload handler
+    if (fileInput) {
+        console.log('Setting up file upload handler...');
+        fileInput.addEventListener('change', function(e) {
+            console.log('File input change event triggered');
+            console.log('Files:', this.files);
+            if (this.files && this.files[0]) {
+                console.log('File selected:', this.files[0].name, 'Size:', this.files[0].size);
+                
+                var file = this.files[0];
+                var fileName = file.name.toLowerCase();
+                
+                // Try to read as text first (for .txt, .csv, .md, etc.)
+                var reader = new FileReader();
+                reader.onload = function() {
+                    console.log('File read successfully, content length:', reader.result.length);
+                    loadRecipeFromContent(reader.result);
+                    // Hide the file input after successful upload
+                    fileInput.style.display = 'none';
+                    // Remove the label if it exists
+                    var label = fileInput.previousElementSibling;
+                    if (label && label.tagName === 'P') {
+                        label.remove();
+                    }
+                };
+                reader.onerror = function() {
+                    console.error('Error reading file:', reader.error);
+                    alert('Error reading file: ' + reader.error + '\n\nPlease make sure the file is not corrupted and try again.');
+                };
+                
+                // Try to read as text - this will work for most text-based formats
+                reader.readAsText(fileInput.files[0]);
+            } else {
+                console.log('No file selected or files array is empty');
+            }
+        }, false);
+    } else {
+        console.error('File input element not found!');
+    }
 });
 
 // Function to load a specific recipe file
@@ -255,13 +315,3 @@ function animateFoodEmoji() {
         }, 1600);
     }
 }
-
-// File upload handler
-var input = document.querySelector('input');
-input.addEventListener('change', function(e){
-    var reader = new FileReader();
-    reader.onload = function() {
-        loadRecipeFromContent(reader.result);
-    };
-    reader.readAsText(input.files[0]);
-}, false);
