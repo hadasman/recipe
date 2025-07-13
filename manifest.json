@@ -2,7 +2,7 @@
   "name": "Recipe Organizer",
   "short_name": "Recipes",
   "description": "Step by step recipe guide",
-  "start_url": "/",
+  "start_url": "/recipe/",
   "display": "standalone",
   "background_color": "#fbe7b2",
   "theme_color": "#fbe7b2",
