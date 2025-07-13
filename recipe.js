@@ -128,6 +128,28 @@ function loadRecipeFromContent(content) {
         buttonsDiv.appendChild(buttonDiv);
     }
 
+    // Add the "בתיאבון!" button as a static celebratory button
+    var bonAppetitButton = document.createElement('input');
+    bonAppetitButton.type = 'button';
+    bonAppetitButton.value = "בתיאבון! 🍽️";
+    bonAppetitButton.className = "step_button bon-appetit-step";
+    bonAppetitButton.style.cursor = "pointer";
+    
+    // Add click event for confetti and emoji animation
+    bonAppetitButton.addEventListener('click', function() {
+        createConfetti();
+        animateFoodEmoji();
+    });
+
+    var buttonDiv = document.createElement("div");
+    buttonDiv.style.display = "flex";
+    buttonDiv.style.alignItems = "center";
+    buttonDiv.style.width = "100%";
+    buttonDiv.style.marginBottom = "10px";
+    
+    buttonDiv.appendChild(bonAppetitButton);
+    buttonsDiv.appendChild(buttonDiv);
+    
     document.body.appendChild(ingredients_div);
     document.body.appendChild(buttonsDiv);
     num_lines = lines.length;
@@ -137,18 +159,13 @@ function loadRecipeFromContent(content) {
 var line_number = 0;
 function next_item(n){
     line_number = n;
-    if (parseInt(line_number) === num_lines){
-        Notification.requestPermission().then(permission => {
-            if (permission==="granted"){
-                console.log(permission);
-                const notification = new Notification("Recipe Completed!", {body: "Recipe Completed!", title:"..."});
-            }
-        });
-    } else {            
-        console.log(line_number);
-        console.log(`button${line_number}`);
-        var targetButton = document.querySelector(`#step_button${line_number}`);
-        var targetCheckMark = document.querySelector(`#check_div${line_number}`);
+    
+    // Handle button size change and checkmark for all buttons
+    console.log(`button${line_number}`);
+    var targetButton = document.querySelector(`#step_button${line_number}`);
+    var targetCheckMark = document.querySelector(`#check_div${line_number}`);
+    
+    if (targetButton && targetCheckMark) {
         if (targetButton.style.OnOff!="Off"){
             targetButton.style.color = "#F0DAC5";
             targetButton.style.minHeight = "0";
@@ -164,7 +181,78 @@ function next_item(n){
             targetButton.style.margin = "";
             targetButton.style.OnOff = "On";
             targetCheckMark.style.display = "none";
-        }   
+        }
+    }
+}
+
+// Function to create confetti animation
+function createConfetti() {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd'];
+    const confettiCount = 500;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = -10 + 'px';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.zIndex = '9999';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        
+        document.body.appendChild(confetti);
+        
+        const animation = confetti.animate([
+            { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        });
+        
+        animation.onfinish = () => confetti.remove();
+    }
+}
+
+// Function to animate food emoji
+function animateFoodEmoji() {
+    const recipeSelect = document.getElementById('recipeSelect');
+    const selectedOption = recipeSelect.options[recipeSelect.selectedIndex];
+    
+    if (selectedOption && selectedOption.getAttribute('data-icon')) {
+        const icon = selectedOption.getAttribute('data-icon');
+        const emojiElement = document.createElement('div');
+        emojiElement.textContent = icon;
+        emojiElement.style.position = 'fixed';
+        emojiElement.style.fontSize = '60px';
+        emojiElement.style.left = '50%';
+        emojiElement.style.top = '50%';
+        emojiElement.style.transform = 'translate(-50%, -50%)';
+        emojiElement.style.zIndex = '10000';
+        emojiElement.style.pointerEvents = 'none';
+        emojiElement.style.transition = 'all 0.5s ease-in-out';
+        
+        document.body.appendChild(emojiElement);
+        
+        // Animate the emoji
+        setTimeout(() => {
+            emojiElement.style.transform = 'translate(-50%, -50%) scale(1.5) rotate(360deg)';
+        }, 100);
+        
+        setTimeout(() => {
+            emojiElement.style.transform = 'translate(-50%, -50%) scale(1) rotate(720deg)';
+        }, 600);
+        
+        setTimeout(() => {
+            emojiElement.style.opacity = '0';
+            emojiElement.style.transform = 'translate(-50%, -50%) scale(0.5) rotate(1080deg)';
+        }, 1100);
+        
+        setTimeout(() => {
+            emojiElement.remove();
+        }, 1600);
     }
 }
 

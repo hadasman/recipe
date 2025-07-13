@@ -298,6 +298,17 @@ h2 {
     }
 }
 
+/* Bon Appétit step button styling */
+.bon-appetit-step {
+    background-color: #c576ac !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.bon-appetit-step:hover {
+    background-color: #a05a8a !important;
+}
+
 /* Touch-friendly improvements */
 @media (hover: none) and (pointer: coarse) {
     .step_button {
@@ -329,6 +340,7 @@ h2 {
         background-color: #F0DAC5;
         border-color: #c576ac;
     }
+    
 }
 
 
