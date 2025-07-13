@@ -15,17 +15,20 @@
     <h1>Recipe Organizer</h1>
     
     <div class="upload-section">
+        <h2>Recipe Files</h2>
         <div class="file-controls">
+            <div class="upload-control">
+                <label for="customFileButton">Upload Recipe File:</label>
+                <input type="file" name="file" id="customFileButton">
+            </div>
+            
             <div class="dropdown-control">
+                <label for="recipeSelect">Or choose from available recipes:</label>
                 <select id="recipeSelect" class="recipe-dropdown">
-                    <option value="">Choose a recipe...</option>
+                    {{DROPDOWN_OPTIONS}}
                 </select>
             </div>
         </div>
-        <!-- Hidden file input for upload functionality -->
-        <input type="file" name="file" id="customFileButton" style="display: none;">
-        
-
     </div>
 
     <script src="./recipe.js"></script>
