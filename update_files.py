@@ -40,7 +40,8 @@ def update_files_json():
         try:
             with open('files.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                existing_files = data if isinstance(data, list) else (data.get('files', []) if isinstance(data, dict) else [])
+                # Expecting a list of dicts with 'name' key
+                existing_files = [item['name'] for item in data if 'name' in item]
         except (json.JSONDecodeError, FileNotFoundError):
             existing_files = []
     
