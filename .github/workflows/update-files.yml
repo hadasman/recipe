@@ -1,8 +1,9 @@
+# Trigger re-index
 name: Update Recipe Files List
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, gh-pages ]
   workflow_dispatch:
 
 jobs:
