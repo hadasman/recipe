@@ -28,7 +28,7 @@ def _is_system_file(file_path):
     return file_path.startswith('.')
 
 def _is_code_file(file_path):
-    return file_path.endswith(('.py', '.git', '.DS_Store', '.css', '.js', '.html', '.json', '.md', '.yml'))
+    return file_path.endswith(('.py', '.git', '.DS_Store', '.css', '.js', '.html', '.json', '.md', '.yml', '.png'))
 
 def update_files_json():
     """Update the files.json with current recipe files only if changed"""
@@ -40,7 +40,6 @@ def update_files_json():
         try:
             with open('files.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                # Expecting a list of dicts with 'name' key
                 existing_files = [item['name'] for item in data if 'name' in item]
         except (json.JSONDecodeError, FileNotFoundError):
             existing_files = []
